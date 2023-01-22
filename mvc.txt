@@ -1,0 +1,13 @@
+controller : decide which function use
+views: how data show to the people
+model: process data
+benefits:
+
+association be like: 
+controller <=> views
+controller <=> database 
+view & database have no association
+
+controller is the center of association ( can be named CEO)
+
+another association also knows is modal, which is CEO; 
