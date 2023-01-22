@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+# -d : directory, -f : file
+#đk file : nếu như đường dẫn không tồn tại thì thực thi RewriteRule 
+
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+#bất kể những gì user nhập đều bay vô đường dẫn là index.php?url
+#QSA append parameters . 
+#VD: olle?p=1 will => index.php?url=olle&p=1.
+#L means if the rule matches, don't process any more RewriteRules below this one.
