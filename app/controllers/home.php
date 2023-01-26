@@ -5,7 +5,6 @@ class Home extends Controller
 
     public function index()
     {
-        $this->data['page_title'] = "home";
 
         //$thiss= 
         $this->view("minima/header", ['page_title' => "Home"]);

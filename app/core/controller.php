@@ -1,30 +1,38 @@
 <?php
 abstract class Controller
 {
-    // data(page_title=>"", post=>"")
-    protected $data = [];
-    protected function view($name, $data = [])
+    /**
+     * render view with data
+     * @param string $viewName
+     * @param array $data
+     * @return void
+     */
+    protected function view($viewName, $data = [])
     {
         extract($data);
-        //$data['page_title']->$page_title, for header
-        //  require_once "../app/views/{$name}.php";
 
-        if (file_exists("../app/views/" . $name . ".php")) {
-            include "../app/views/" . $name . ".php";
+        if (file_exists("../app/views/" . $viewName . ".php")) {
+            require "../app/views/" . $viewName . ".php";
         } else {
-            include "../app/views/404.php";
+            require "../app/views/404.php";
         }
     }
-    protected function loadModel($name)
+    /**
+     * get model object
+     * @param string $modalName
+     * @return Modal|null  
+     */
+    protected function loadModel($modalName)
     {
+        if (file_exists("../app/models/" . $modalName . ".php")) {
+            require "../app/models/" . $modalName . ".php";
 
+            return new $modalName;
+        } else {
+            return null;
+        }
         # code...
     }
-    /**function 
-     * load page
-     * @param int $a
-     * @param int $b
-     * @return int
-     */
+
     public abstract function index();
 }

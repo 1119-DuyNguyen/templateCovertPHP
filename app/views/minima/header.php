@@ -5,7 +5,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?= $page_title . " | " . WEBSITE_TITLE ?></title>
+  <title>
+    <?= $page_title . " | " . WEBSITE_TITLE ?>
+  </title>
   <!-- <link rel="stylesheet" href="style.css"> -->
   <link rel="stylesheet" href="<?= ASSETS ?>minima/css/components.css">
   <link rel="stylesheet" href="<?= ASSETS ?>minima/css/icons.css">
@@ -35,9 +37,14 @@
             <img class="logo-after" src="<?= ASSETS ?>minima/img/logo-dark.png" alt="">
           </a>
         </div>
-        <?php if (isset($_SESSION['user_name'])) : ?>
 
-          Hi <?= $_SESSION['user_name'] ?>
+
+
+        <?php if (isset($_SESSION['user_name'])): ?>
+
+          <script type="text/javascript">
+            console.log(" hi <?= $_SESSION['user_name'] ?>");
+          </script>
 
         <?php endif; ?>
         <div class="s-12 l-10">
@@ -48,10 +55,10 @@
               <li><a href="<?= ROOT ?>about">About Us</a></li>
               <li><a href="<?= ROOT ?>contact">Contact</a></li>
 
-              <?php if (!isset($_SESSION['user_name'])) : ?>
+              <?php if (!isset($_SESSION['user_name'])): ?>
                 <li><a href="<?= ROOT ?>login">Login</a></li>
                 <li><a href="<?= ROOT ?>signup">Signup</a></li>
-              <?php else : ?>
+              <?php else: ?>
                 <li><a href="<?= ROOT ?>logout">Logout</a></li>
                 <li><a href="<?= ROOT ?>upload">Upload</a></li>
               <?php endif; ?>
