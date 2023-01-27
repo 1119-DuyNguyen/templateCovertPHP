@@ -47,7 +47,13 @@ class Database
         return new Database($pdo);
     }
 
-    public function insert($table, $data)
+    /**
+     * Summary of insert
+     * @param string $table
+     * @param array $data
+     * @return bool
+     */
+    public function insert(string $table, array $data)
     {
         $columns = implode(", ", array_keys($data));
         $values = ":" . implode(", :", array_keys($data));
@@ -60,41 +66,34 @@ class Database
 
         return $stmt->execute();
     }
-    public function selectAll($table)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM {$table}");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS);
-    }
-
 
 
     /**
      * read data return array if success otherwise null
      *@* @param string $query : sql statement
-     *@* @param array data : binding elements 
+     *@* @param array $params : binding elements 
      *@return array|null
      */
-    public function read($query, $data = [])
+    public function read($query, $params = [])
     {
 
         $PDO = $this->pdo;
         $stm = $PDO->prepare($query);
         $isGetData = 0;
-        if (count($data) == 0) {
+        if (count($params) == 0) {
             $stm = $PDO->query($query);
             if ($stm) {
                 $isGetData = 1;
             }
         } else {
 
-            $isGetData = $stm->execute($data);
+            $isGetData = $stm->execute($params);
         }
 
         if ($isGetData) {
-            $data = $stm->fetchAll(PDO::FETCH_OBJ);
-            if (is_array($data) && count($data) > 0) {
-                return $data;
+            $params = $stm->fetchAll(PDO::FETCH_OBJ);
+            if (is_array($params) && count($params) > 0) {
+                return $params;
             }
 
             return null;

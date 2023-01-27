@@ -13,7 +13,7 @@ class User extends Model
 
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $DB = Database::create('mysql');
-            $sql = "SELECT * FROM users WHERE username=:username AND password= :password";
+            $sql = "SELECT * FROM users WHERE username=:username AND password= :password;";
 
             $user = $DB->read(
                 $sql,
@@ -26,6 +26,9 @@ class User extends Model
 
             if ($user) {
                 $_SESSION['user_name'] = $_POST['username'];
+
+                $_SESSION['user_id'] = $user[0]->id;
+
 
                 header("Location:" . ROOT . "home");
                 return;

@@ -9,6 +9,7 @@ class Logout extends Controller
 
         unset($_SESSION['user_name']);
 
+        unset($_SESSION['user_id']);
         header("Location:" . ROOT . "home");
         exit();
 
