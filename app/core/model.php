@@ -46,5 +46,25 @@ abstract class Model
         return null;
 
     }
+    /**
+     *  query only one element
+     * @param string $id
+     * @return array|null
+     */
+    function getOne($id)
+    {
 
+        $query = "select * from " . static::$table . " where id = :id limit 1";
+        $DB = Database::create(static::$driver);
+
+        $data = $DB->read($query, ['id' => strval($id)]);
+
+
+        if ($data) {
+
+            return $data[0];
+        }
+
+        return null;
+    }
 }

@@ -13,7 +13,7 @@
         <p class="subject-error form-error">Please enter a title.</p>
       </div>
       <div class="s-12">
-        <input name="file" class="subject" type="file" required>
+        <input name="file[]" class="subject" type="file" required multiple>
         <p class="subject-error form-error">Please select a file.</p>
       </div>
 

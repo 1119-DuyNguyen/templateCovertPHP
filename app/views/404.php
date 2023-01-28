@@ -1,1 +1,1 @@
-This is the 404 page
+404 not found
