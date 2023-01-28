@@ -14,7 +14,8 @@ abstract class Controller
         if (file_exists("../app/views/" . $viewName . ".php")) {
             require "../app/views/" . $viewName . ".php";
         } else {
-            require "../app/views/404.php";
+            require "../app/views/404Header.php";
+            require "./404.html";
         }
     }
     /**

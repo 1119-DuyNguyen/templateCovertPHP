@@ -16,7 +16,7 @@
     <div class="background-white full-width">
       <?php foreach ($images_user as $row): ?>
 
-        <div class="s-12 m-6 l-five" style="margin:12px ; margin-left:0;">
+        <div class="s-12 m-6 l-five">
           <a class="image-with-hover-overlay image-hover-zoom"
             href="<?= ROOT . 'home/detail/' . \myFuncs\hashNumber($row->id); ?>/" title="Portfolio Image">
             <div class="image-hover-overlay background-primary">
@@ -40,4 +40,19 @@
 
 
   </article>
+  <br>
+  <section>
+    <div style="
+  position:relative;
+  clear:both;
+  height:50px;
+  max-height: 10vw; width: 100%;">
+      <a href="<?= $prev_page ?>"><input type="button" class="s-12 submit-form button background-primary text-white"
+          style="width: 200px; float:left;" value="Prev"></a>
+      <a href="<?= $next_page ?>"><input type="button" class="s-12 submit-form button background-primary text-white"
+          style="width: 200px; float: right;" value="Next"></a>
+
+    </div>
+
+  </section>
 </main>

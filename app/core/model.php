@@ -24,17 +24,20 @@ abstract class Model
      * get all in the table
      * @return array|null
      */
-    public function getAll()
+    public function getAll($limit = "5")
     {
         $DB = Database::create(static::$driver);
 
 
-        // $page_number = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        // $page_number = $page_number < 1 ? 1 : $page_number;
+        $page_number =
+            isset($_GET['page']) && ctype_digit($_GET['page'])
+            ? (int) $_GET['page'] : 1;
 
-        $limit = 12;
-        // $offset = ($page_number - 1) * $limit;
-        $offset = 0; // vị trí
+        $page_number = $page_number < 1 ? 1 : $page_number;
+
+
+        $offset = ($page_number - 1) * $limit;
+
         $query = "select * from " . static::$table . " order by id desc limit $limit offset $offset";
 
         $data = $DB->read($query);

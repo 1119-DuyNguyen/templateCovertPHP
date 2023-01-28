@@ -10,7 +10,7 @@ class Home extends Controller
 
         $imageClass = $this->loadModel("image");
 
-        $data = $imageClass->getAll();
+        $data = $imageClass->getAll(5);
         if ($data) {
             //     \myFuncs\show($data);
             foreach ($data as $key => $value) {
@@ -18,9 +18,15 @@ class Home extends Controller
             }
             $images_thumbnail = $data;
         }
+        $prev_page = $this->generate_link($this->current_page_number() - 1);
+        $next_page = $this->generate_link($this->current_page_number() + 1);
 
 
-        $this->view("minima/home", ['images_user' => $images_thumbnail]);
+        $this->view("minima/home", [
+            'images_user' => $images_thumbnail,
+            "prev_page" => $prev_page,
+            "next_page" => $next_page
+        ]);
 
         $this->view("minima/footer");
     }
@@ -47,8 +53,41 @@ class Home extends Controller
 
         }
         if (!$isExist) {
-            header("Location:" . ROOT . "home");
+            $this->view("404");
         }
+
+    }
+
+    public function current_page_number(): int
+    {
+        $page = isset($_GET['page']) && ctype_digit($_GET['page'])
+            ? (int) $_GET['page']
+            : 1;
+        return $page;
+    }
+    // pagination php
+    public function generate_link($number)
+    {
+
+        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+
+        parse_str($query, $params);
+        $url = "";
+        // Returns a string if the URL has parameters or NULL if not
+        if ($query) {
+            $url .= "?";
+            foreach ($params as $key => $value) {
+                if ($key === "page")
+                    continue;
+                $url .= $key . "=" . $value . "&";
+            }
+            $url .= 'page=';
+        } else {
+            $url .= '?page=';
+        }
+
+        return ROOT . "home" . $url . $number;
+
 
     }
 }
